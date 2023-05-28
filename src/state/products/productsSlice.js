@@ -26,6 +26,11 @@ const productsSlice = createSlice({
       const cart = state.cart.filter(res => res.id !== action.payload);
       state.cart = cart;
     },
+    resetCart: (state, action) => {
+      state.cart = [];
+      state.cartCount = 0;
+      state.selectedItem = null;
+    },
   },
   extraReducers: builder => {
     builder.addCase(getProducts.pending, state => {
@@ -64,7 +69,7 @@ const productsSlice = createSlice({
   },
 });
 
-export const {userAuthentication, addtoCart, deleteItem} =
+export const {userAuthentication, addtoCart, deleteItem, resetCart} =
   productsSlice.actions;
 
 export default productsSlice.reducer;

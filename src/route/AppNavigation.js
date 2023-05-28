@@ -36,7 +36,7 @@ const AppNavigation = () => {
           <Tab.Screen
             name="Cart"
             options={{
-              title: 'Card',
+              title: 'Cart',
               headerLeft: () => null,
               tabBarIcon: ({color, size}) => (
                 <MaterialCommunityIcons name="cart" color={color} size={size} />
