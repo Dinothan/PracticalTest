@@ -63,7 +63,10 @@ const CardScreen = ({navigation}) => {
           ))}
       </View>
       <View style={styles.logout}>
-        <Button mode="contained" onPress={onPressCheckout}>
+        <Button
+          disabled={cart.length === 0}
+          mode="contained"
+          onPress={onPressCheckout}>
           Checkout
         </Button>
       </View>
