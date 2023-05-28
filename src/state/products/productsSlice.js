@@ -10,7 +10,11 @@ const initialState = {
 const productsSlice = createSlice({
   name: 'home',
   initialState,
-  reducers: {},
+  reducers: {
+    resetAuth: state => {
+      state.products = null;
+    },
+  },
   extraReducers: builder => {
     builder.addCase(getProducts.pending, state => {
       state.isLoading = true;

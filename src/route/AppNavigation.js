@@ -20,54 +20,44 @@ const AppNavigation = () => {
   const HomeTabScreen = () => {
     return (
       <Tab.Navigator>
-        {isAuthenticatedUser && (
-          <>
-            <Tab.Screen
-              name="Products"
-              options={{
-                headerLeft: () => null,
-                tabBarIcon: ({color, size}) => (
-                  <MaterialCommunityIcons
-                    name="home"
-                    color={color}
-                    size={size}
-                  />
-                ),
-              }}
-              component={HomeScreen}
-            />
-            <Tab.Screen
-              name="Cart"
-              options={{
-                title: 'Card',
-                headerLeft: () => null,
-                tabBarIcon: ({color, size}) => (
-                  <MaterialCommunityIcons
-                    name="cart"
-                    color={color}
-                    size={size}
-                  />
-                ),
-              }}
-              component={CartScreen}
-            />
-            <Tab.Screen
-              name="Profile"
-              options={{
-                title: 'Profile',
-                headerLeft: () => null,
-                tabBarIcon: ({color, size}) => (
-                  <MaterialCommunityIcons
-                    name="account"
-                    color={color}
-                    size={size}
-                  />
-                ),
-              }}
-              component={ProfileScreen}
-            />
-          </>
-        )}
+        <>
+          <Tab.Screen
+            name="Products"
+            options={{
+              headerLeft: () => null,
+              tabBarIcon: ({color, size}) => (
+                <MaterialCommunityIcons name="home" color={color} size={size} />
+              ),
+            }}
+            component={HomeScreen}
+          />
+          <Tab.Screen
+            name="Cart"
+            options={{
+              title: 'Card',
+              headerLeft: () => null,
+              tabBarIcon: ({color, size}) => (
+                <MaterialCommunityIcons name="cart" color={color} size={size} />
+              ),
+            }}
+            component={CartScreen}
+          />
+          <Tab.Screen
+            name="Profile"
+            options={{
+              title: 'Profile',
+              headerLeft: () => null,
+              tabBarIcon: ({color, size}) => (
+                <MaterialCommunityIcons
+                  name="account"
+                  color={color}
+                  size={size}
+                />
+              ),
+            }}
+            component={ProfileScreen}
+          />
+        </>
       </Tab.Navigator>
     );
   };
@@ -79,12 +69,13 @@ const AppNavigation = () => {
         component={LoginScreen}
         options={{headerShown: false}}
       />
-
-      <Stack.Screen
-        name="Products"
-        component={HomeTabScreen}
-        options={{headerShown: false}}
-      />
+      {isAuthenticatedUser && (
+        <Stack.Screen
+          name="Products"
+          component={HomeTabScreen}
+          options={{headerShown: false}}
+        />
+      )}
     </Stack.Navigator>
   );
 };
