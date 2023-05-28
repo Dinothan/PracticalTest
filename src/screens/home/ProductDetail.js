@@ -1,12 +1,11 @@
 import React, {useState} from 'react';
 import Background from '../../components/Layout';
-import {useAppSelector} from '../../hooks/hooks';
+import {useAppSelector, useAppDispatch} from '../../hooks/hooks';
 import Slideshow from '../../modules/react-native-slideshow';
 import {Text, View, StyleSheet} from 'react-native';
 import {Rating} from 'react-native-ratings';
 import Slider from '@react-native-community/slider';
 import Button from '../../components/Button';
-import {useAppDispatch} from '../../hooks/hooks';
 import {addtoCart} from '../../state/products/productsSlice';
 
 const ProductDetail = ({navigation}) => {
@@ -22,7 +21,13 @@ const ProductDetail = ({navigation}) => {
 
   const onPressAddtoCart = () => {
     dispatch(
-      addtoCart({name: selectedItem.title, qty, price: selectedItem.price}),
+      addtoCart({
+        id: selectedItem.id,
+        name: selectedItem.title,
+        qty,
+        price: selectedItem.price,
+        thumbnail: selectedItem.thumbnail,
+      }),
     );
 
     navigation.navigate('Products');
@@ -93,7 +98,10 @@ const ProductDetail = ({navigation}) => {
         </View>
       </View>
       <View style={styles.logout}>
-        <Button mode="contained" onPress={() => onPressAddtoCart()}>
+        <Button
+          disabled={Number(qty) < 1}
+          mode="contained"
+          onPress={() => onPressAddtoCart()}>
           Add to Cart ({cartCount})
         </Button>
       </View>

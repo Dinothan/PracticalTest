@@ -19,7 +19,12 @@ const productsSlice = createSlice({
     },
     addtoCart: (state, action) => {
       state.cartCount = state.cartCount + 1;
-      state.cart = state.cart.push(action);
+      state.cart.push(action.payload);
+    },
+    deleteItem: (state, action) => {
+      state.cartCount = state.cartCount - 1;
+      const cart = state.cart.filter(res => res.id !== action.payload);
+      state.cart = cart;
     },
   },
   extraReducers: builder => {
@@ -59,6 +64,7 @@ const productsSlice = createSlice({
   },
 });
 
-export const {userAuthentication, addtoCart} = productsSlice.actions;
+export const {userAuthentication, addtoCart, deleteItem} =
+  productsSlice.actions;
 
 export default productsSlice.reducer;
