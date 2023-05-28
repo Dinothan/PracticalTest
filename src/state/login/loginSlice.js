@@ -23,12 +23,15 @@ const loginCheckSlice = createSlice({
       });
       state.isAuthenticated =
         auth.toString().length > 0 !== null ? true : false;
-      state.user = action;
+      state.user = action.payload;
+    },
+    resetAuth: state => {
+      state.isAuthenticated = false;
+      state.user = null;
     },
   },
-  extraReducers: builder => {},
 });
 
-export const {userAuthentication} = loginCheckSlice.actions;
+export const {userAuthentication, resetAuth} = loginCheckSlice.actions;
 
 export default loginCheckSlice.reducer;
