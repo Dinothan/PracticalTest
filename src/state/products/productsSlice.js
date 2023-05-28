@@ -1,10 +1,13 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {getProducts} from './productsThunk';
+import {getItemById, getProducts} from './productsThunk';
 
 const initialState = {
   products: null,
   error: null,
   isLoading: false,
+  selectedItem: null,
+  cart: [],
+  cartCount: 0,
 };
 
 const productsSlice = createSlice({
@@ -13,6 +16,10 @@ const productsSlice = createSlice({
   reducers: {
     resetAuth: state => {
       state.products = null;
+    },
+    addtoCart: (state, action) => {
+      state.cartCount = state.cartCount + 1;
+      state.cart = state.cart.push(action);
     },
   },
   extraReducers: builder => {
@@ -32,9 +39,26 @@ const productsSlice = createSlice({
       }
       state.isLoading = false;
     });
+
+    builder.addCase(getItemById.pending, state => {
+      state.isLoading = true;
+      state.error = null;
+    });
+
+    builder.addCase(getItemById.fulfilled, (state, {payload}) => {
+      state.selectedItem = payload;
+      state.isLoading = false;
+    });
+
+    builder.addCase(getItemById.rejected, (state, {payload}) => {
+      if (payload != null) {
+        state.error = payload.message;
+      }
+      state.isLoading = false;
+    });
   },
 });
 
-export const {userAuthentication} = productsSlice.actions;
+export const {userAuthentication, addtoCart} = productsSlice.actions;
 
 export default productsSlice.reducer;
