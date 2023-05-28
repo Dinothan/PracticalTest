@@ -33,7 +33,7 @@ const LoginScreen = ({navigation}) => {
           const user = res;
           delete user.token;
           dispatch(userAuthentication(user));
-          navigation.navigate('Home');
+          navigation.navigate('Products');
         })
         .catch(e => {
           console.error(e);
