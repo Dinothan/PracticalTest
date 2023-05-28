@@ -1,10 +1,18 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
 import {Card, Text} from 'react-native-paper';
+import {useDispatch} from 'react-redux';
+import {getItemById} from '../state/products/productsThunk';
 
-const CardComponent = ({title, content, imageUrl}) => {
+const CardComponent = ({title, content, imageUrl, id, navigation}) => {
+  const dispatch = useDispatch();
+  const onPressItem = () => {
+    dispatch(getItemById(id));
+
+    navigation.navigate('ProductDetails');
+  };
   return (
-    <Card style={styles.container}>
+    <Card style={styles.container} onPress={onPressItem}>
       <Card.Content>
         <Text variant="titleLarge">{title}</Text>
         <Text variant="bodyMedium" numberOfLines={1}>

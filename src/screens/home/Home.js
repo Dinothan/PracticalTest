@@ -1,11 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect} from 'react';
 import {ScrollView} from 'react-native';
-import CardComponent from '../components/Card';
-import {useAppDispatch, useAppSelector} from '../hooks/hooks';
-import {getProducts} from '../state/products/productsThunk';
-import Background from '../components/Layout';
+import CardComponent from '../../components/Card';
+import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
+import {getProducts} from '../../state/products/productsThunk';
+import Background from '../../components/Layout';
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -20,9 +21,11 @@ const HomeScreen = () => {
           products.map(res => (
             <CardComponent
               key={res.id}
+              id={res.id}
               title={res.title}
               content={res.description}
               imageUrl={res.thumbnail}
+              navigation={navigation}
             />
           ))}
       </Background>

@@ -12,3 +12,15 @@ export const getProducts = createAsyncThunk('getProducts', async () => {
     console.log(error);
   }
 });
+
+export const getItemById = createAsyncThunk('getItemById', async id => {
+  try {
+    const response = await axios
+      .get(`https://dummyjson.com/products/${id}`)
+      .then(res => res);
+
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+});

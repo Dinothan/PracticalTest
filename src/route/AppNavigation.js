@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unstable-nested-components */
 import React from 'react';
-import HomeScreen from '../screens/Home';
+import HomeScreen from '../screens/home/Home';
 import LoginScreen from '../screens/Login';
 import ProfileScreen from '../screens/Profile';
 import CartScreen from '../screens/Cart';
@@ -8,6 +8,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {useAppSelector} from '../hooks/hooks';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import ProductDetail from '../screens/home/ProductDetail';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -70,11 +71,18 @@ const AppNavigation = () => {
         options={{headerShown: false}}
       />
       {isAuthenticatedUser && (
-        <Stack.Screen
-          name="Products"
-          component={HomeTabScreen}
-          options={{headerShown: false}}
-        />
+        <>
+          <Stack.Screen
+            name="Products"
+            component={HomeTabScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="ProductDetails"
+            component={ProductDetail}
+            options={{title: ''}}
+          />
+        </>
       )}
     </Stack.Navigator>
   );
